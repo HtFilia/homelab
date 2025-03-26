@@ -1,0 +1,50 @@
+- name: Home
+  width: slim
+  hide-desktop-navigation: false
+  center-vertically: true
+  columns:
+    - size: full
+      widgets:
+        - type: search
+          search-engine: google
+          autofocus: true
+
+        - type: docker-containers
+          title: Healthcheck
+          hide-by-default: false
+
+        - type: bookmarks
+          groups:
+            - title: General
+              links:
+                - title: Gmail
+                  url: https://mail.google.com/mail/u/0/
+                  icon: si:gmail
+                - title: Amazon
+                  url: https://www.amazon.fr/
+                  icon: si:amazon
+                - title: Github
+                  url: https://github.com/
+                  icon: si:github
+            - title: Entertainment
+              links:
+                - title: YouTube
+                  url: https://www.youtube.com/
+                  icon: si:youtube
+                - title: Chess
+                  url: https://www.chess.com/
+                  icon: si:chessdotcom
+                - title: Netflix
+                  url: https://www.netflix.com/
+                  icon: si:netflix
+            - title: Social
+              links:
+                - title: Reddit
+                  url: https://www.reddit.com/
+                  icon: si:reddit
+                - title: Instagram
+                  url: https://www.instagram.com/
+                  icon: si:instagram
+                - title: LinkedIn
+                  url: https://www.linkedin.com/
+                  icon: si:linkedin

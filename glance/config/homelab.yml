@@ -1,0 +1,59 @@
+- name: Homelab
+  width: slim
+  hide-desktop-navigation: false
+  center-vertically: false
+  columns:
+    - size: small
+      widgets:
+        - type: monitor
+          cache: 5m
+          title: Ping
+          sites:
+            - title: Dev Portfolio
+              url: https://lucaslebihan.dev
+              icon: /assets/wordpress.svg
+        - type: docker-containers
+          title: Containers
+          hide-by-default: false
+        - type: extension
+          title: VPN
+          url: http://tailscale-extension:8677/
+          cache: 10m
+          allow-potentially-dangerous-html: true
+          parameters:
+            show-user: false
+    - size: full
+      widgets:
+        - type: videos
+          style: horizontal-cards
+          limit: 10
+          channels:
+            - UCWedHS9qKebauVIK2J7383g # Underscore_
+            - UCSULDz1yaHLVQWHpm4g_GHA # Monsieur Bidouille
+            - UCp3yVOm6A55nx65STpm3tXQ # Craft Computing
+            - UCZNhwA1B5YqiY1nLzmM0ZRg # Christian Lempa
+            - UCIgNWXsJcFwvFptmUic6wSw # Apalrd's Adventure
+            - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome
+            - UCVS6ejD9NLZvjsvhcbiDzjw # Crosstalk Solutions
+            - UCVy16RS5eEDh8anP8j94G2A # DB Tech
+            - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+            - UCsnGwSIHyoYN0kiINAGUKxg # Wolfgang
+        - type: group
+          define: &shared-properties
+            type: reddit
+            show-thumbnails: true
+            show-flairs: true
+            collapse-after: 6
+          widgets:
+            - subreddit: selfhosted
+              <<: *shared-properties
+            - subreddit: homelab
+              <<: *shared-properties
+            - subreddit: localllama
+              <<: *shared-properties
+            - subreddit: stablediffusion
+              <<: *shared-properties
+            - subreddit: technology
+              <<: *shared-properties
+
+

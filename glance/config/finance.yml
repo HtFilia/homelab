@@ -1,0 +1,126 @@
+- name: Finance
+  width: slim
+  hide-desktop-navigation: false
+  center-vertically: false
+  columns:
+    - size: full
+      widgets:
+        - type: rss
+          title: Bloomberg
+          limit: 15
+          style: horizontal-cards
+          preserve-order: false
+          collapse-after: 3
+          cache: 5m
+          feeds:
+            - url: https://feeds.bloomberg.com/markets/news.rss
+              title: Markets
+            - url: https://feeds.bloomberg.com/politics/news.rss
+              title: Politics
+            - url: https://feeds.bloomberg.com/technology/news.rss
+              title: Technology
+            - url: https://feeds.bloomberg.com/wealth/news.rss
+              title: Wealth
+            - url: https://feeds.bloomberg.com/economics/news.rss
+              title: Economics
+            - url: https://feeds.bloomberg.com/industries/news.rss
+              title: Industries
+            - url: https://feeds.bloomberg.com/crypto/news.rss
+              title: Crypto
+        - type: split-column
+          define: &shared-properties
+            type: reddit
+            show-thumbnails: true
+            show-flairs: true
+            collapse-after: 8
+          widgets:
+            - subreddit: wallstreetbets
+              <<: *shared-properties
+            - type: group
+              widgets:
+                - subreddit: stockmarket
+                  <<: *shared-properties
+                - subreddit: thetagang
+                  <<: *shared-properties
+    - size: small
+      widgets:
+        - type: markets
+          title: Indices
+          sort-by: change
+          markets:
+            - symbol: ^FCHI
+              name: CAC 40
+              chart-link: https://www.boursorama.com/bourse/indices/cours/1rPCAC/
+              symbol-link: https://www.boursorama.com/bourse/indices/cours/1rPCAC/
+            - symbol: ^STOXX50E
+              name: EURO STOXX 50
+              chart-link: https://www.boursorama.com/bourse/indices/cours/2cSX5E/
+              symbol-link: https://www.boursorama.com/bourse/indices/cours/2cSX5E/
+            - symbol: ^GDAXI
+              name: DAX
+              chart-link: https://www.boursorama.com/bourse/indices/cours/5pDAX/
+              symbol-link: https://www.boursorama.com/bourse/indices/cours/5pDAX/
+            - symbol: ^IXIC
+              name: Nasdaq
+              chart-link: https://www.boursorama.com/bourse/indices/cours/%24COMPX/
+              symbol-link: https://www.boursorama.com/bourse/indices/cours/%24COMPX/
+            - symbol: ^FTSE
+              name: FTSE 100
+              chart-link: https://bourse.boursobank.com/bourse/indices/cours/UKX.L/
+              symbol-link: https://bourse.boursobank.com/bourse/indices/cours/UKX.L/
+            - symbol: ^GSPC
+              name: S&P 500
+              chart-link: https://bourse.boursobank.com/bourse/indices/cours/%24INX/
+              symbol-link: https://bourse.boursobank.com/bourse/indices/cours/%24INX/
+            - symbol: ^HSI
+              name: Hang Seng Index
+              chart-link: https://bourse.boursobank.com/bourse/indices/cours/1xHSIX/
+              symbol-link: https://bourse.boursobank.com/bourse/indices/cours/1xHSIX/
+            - symbol: ^DJI
+              name: Dow Jones Industrial
+              chart-link: https://bourse.boursobank.com/bourse/indices/cours/%24INDU/
+              symbol-link: https://bourse.boursobank.com/bourse/indices/cours/%24INDU/
+            - symbol: ^VIX
+              name: CBOE Volatility Index
+              chart-link: https://bourse.boursobank.com/bourse/indices/cours/1cVIX/
+              symbol-link: https://bourse.boursobank.com/bourse/indices/cours/1cVIX/
+        - type: markets
+          title: Forex
+          sort-by: change
+          markets:
+            - symbol: EURUSD=X
+              name: EUR/USD
+              chart-link: https://www.boursorama.com/bourse/devises/taux-de-change-euro-dollar-EUR-USD/
+              symbol-link: https://www.boursorama.com/bourse/devises/taux-de-change-euro-dollar-EUR-USD/
+            - symbol: BTC-EUR
+              name: Bitcoin EUR
+              chart-link: https://www.boursorama.com/bourse/devises/taux-de-change-bitcoin-euro-BTC-EUR/
+              symbol-link: https://www.boursorama.com/bourse/devises/taux-de-change-bitcoin-euro-BTC-EUR/
+            - symbol: EURGBP=X
+              name: EUR/GBP
+              chart-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-livresterling-EUR-GBP/
+              symbol-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-livresterling-EUR-GBP/
+            - symbol: EURCHF=X
+              name: EUR/CHF
+              chart-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-francsuisse-EUR-CHF/
+              symbol-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-francsuisse-EUR-CHF/
+            - symbol: EURNOK=X
+              name: EUR/NOK
+              chart-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-couronnenorv%C3%A9gienne-EUR-NOK/
+              symbol-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-couronnenorv%C3%A9gienne-EUR-NOK/
+            - symbol: EURJPY=X
+              name: EUR/JPY
+              chart-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-yen-EUR-JPY/
+              symbol-link: https://bourse.boursobank.com/bourse/devises/taux-de-change-euro-yen-EUR-JPY/
+        - type: markets
+          title: Commodities
+          sort-by: change
+          markets:
+            - symbol: GC=F
+              name: Gold
+              chart-link: https://bourse.boursobank.com/bourse/matieres-premieres/cours/_GC/
+              symbol-link: https://bourse.boursobank.com/bourse/matieres-premieres/cours/_GC/
+            - symbol: SI=F
+              name: Silver
+              chart-link: https://bourse.boursobank.com/bourse/matieres-premieres/cours/_SI/
+              symbol-link: https://bourse.boursobank.com/bourse/matieres-premieres/cours/_SI/

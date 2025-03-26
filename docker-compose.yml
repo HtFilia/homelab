@@ -1,0 +1,105 @@
+services:
+  # Traefik
+  traefik:
+    container_name: traefik
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - homelab_network
+    labels:
+      traefik.enable: true
+      traefik.http.routers.traefik.rule: Host(`proxy.localhost`)
+      traefik.http.services.traefik.loadbalancer.server.port: 8080
+      glance.name: Traefik
+      glance.url: http://proxy.localhost
+      glance.hide: false
+      glance.icon: si:traefikproxy
+    restart: unless-stopped
+  # Glance
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    volumes:
+      - ./glance/config:/app/config
+      - ./glance/assets:/app/assets
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - '8678:8080'
+    env_file: .env
+    restart: unless-stopped
+    networks:
+      - homelab_network
+    labels:
+      traefik.enable: true
+      traefik.http.routers.glance.rule: Host(`glance.localhost`)
+      glance.name: Glance
+      glance.url: http://glance.localhost
+      glance.id: glance
+      glance.hide: false
+  # Glance Tailscale Extension
+  glance-tailscale-extension:
+    container_name: glance-tailscale-extension
+    image: htfilia/tailscale-glance-extension:latest
+    ports:
+      - "8677:8677"
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - homelab_network
+    labels:
+      traefik.enable: false
+      glance.parent: glance
+      glance.name: Tailscale Healthcheck
+  # Youtube Download
+  youtube-download:
+    container_name: youtube-download
+    ports:
+      - "12498:12498"
+    env_file: .env
+    volumes:
+      - type: bind
+        source: ./media/audio
+        target: /app/audio
+      - type: bind
+        source: ./media/video
+        target: /app/video
+      - type: bind
+        source: ./media/tmp
+        target: /app/tmp
+    restart: unless-stopped
+    networks:
+      - homelab_network
+    labels:
+      traefik.enable: false
+      glance.name: Youtube-Download
+      glance.url: https://youtube.com
+      glance.hide: false
+      glance.icon: si:youtube
+  # Ollama-Webui
+  ollama-webui:
+    container_name: ollama-webui
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    volumes:
+      - ./ollama/data:/app/backend/data
+    restart: unless-stopped
+    networks:
+      - homelab_network
+    labels:
+      traefik.enable: true
+      traefik.http.routers.ollama.rule: Host(`ollama.localhost`)
+      glance.name: Ollama Webui
+      glance.url: http://ollama.localhost
+      glance.hide: false
+      glance.icon: si:ollama
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  homelab_network:
+    external: true
